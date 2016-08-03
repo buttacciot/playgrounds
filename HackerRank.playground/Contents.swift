@@ -49,34 +49,29 @@ struct Matrix {
     }
 }
 
-var mat = Matrix(rows: 6, columns: 6)
-mat[0, 0] = 0; mat[0, 1] = -4; mat[0, 2] = -6; mat[0, 3] = 0; mat[0, 4] = -7; mat[0, 5] = -6
-mat[1, 0] = 0; mat[1, 1] = 1; mat[1, 2] = 0; mat[1, 3] = 0; mat[1, 4] = 0; mat[1, 5] = 0
-mat[2, 0] = 1; mat[2, 1] = 1; mat[2, 2] = 1; mat[2, 3] = 0; mat[2, 4] = 0; mat[2, 5] = 0
-mat[3, 0] = 0; mat[3, 1] = 0; mat[3, 2] = 2; mat[3, 3] = 4; mat[3, 4] = 4; mat[3, 5] = 0
-mat[4, 0] = 0; mat[4, 1] = 0; mat[4, 2] = 0; mat[4, 3] = 2; mat[4, 4] = 0; mat[4, 5] = 0
-mat[5, 0] = 0; mat[5, 1] = 0; mat[5, 2] = 1; mat[5, 3] = 2; mat[5, 4] = 4; mat[5, 5] = 0
+let count = 5
+let rotations = 6
 
-var max = Int.min
+var arr: NSArray = NSArray(arrayLiteral: 1, 2, 3, 4, 5)
 
-for i in 0...3 {
-    for j in 0...3 {
-        let next = mat[i, j] + mat[i, j+1] + mat[i, j+2] + mat[i+1, j+1] + mat[i+2, j] + mat[i+2, j+1] + mat[i+2, j+2]
-        if next > max {
-            max = next
-        }
+func printArray(arr: NSArray, startAt: Int) {
+    
+    var idx = startAt
+    for _ in 0..<arr.count {
+        print(arr[idx], terminator: " ")
+        idx += 1
+        if idx >= arr.count { idx = 0 }
     }
 }
 
-print(max)
-
-
-var array: NSArray = readLine()!.characters.split(" ").map{Int(String($0))!}
-for j in 0...array.count {
-    mat[j, j] = array[j].integerValue
+if count == rotations {
+    printArray(arr, startAt: 0)
+} else if count > rotations {
+    printArray(arr, startAt: rotations)
+} else {
+    let start = rotations % count
+    printArray(arr, startAt: start)
 }
-
-
 
 
 
